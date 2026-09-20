@@ -1,14 +1,14 @@
-name: Windows11_26H1_amd64
+name: Windows11_26H2_amd64
 
 on: workflow_dispatch
 #on: [push, pull_request]
 
 env:
-  Build_VERSION: '28000.1890'
-  FILE_NAME: Windows11_26H1_amd64
+  Build_VERSION: '26300.9539'
+  FILE_NAME: Windows11_26H2_amd64
 
 jobs:
-  Windows11_26H1_amd64:
+  Windows11_26H2_amd64:
     runs-on: windows-latest
 
     steps:
