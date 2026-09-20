@@ -1,11 +1,13 @@
 name: Windows11_26H2_amd64
 
 on: workflow_dispatch
-#on: [push, pull_request]
 
 env:
   Build_VERSION: '26300.9539'
   FILE_NAME: Windows11_26H2_amd64
+
+permissions:
+  contents: write
 
 jobs:
   Windows11_26H2_amd64:
@@ -35,7 +37,6 @@ jobs:
     # 打包
     - name: Package binaries
       run: |
-        #ls     #Directory: D:\a\UUPdumpWinISO\UUPdumpWinISO(即仓库目录)
         7z a -v1950M ${{env.FILE_NAME}}-${{env.Build_VERSION}}.7z ./${{env.FILE_NAME}}/*.iso -mx=9
 
     # 上传镜像
@@ -44,10 +45,10 @@ jobs:
         name: ${{env.FILE_NAME}}-${{env.Build_VERSION}}
         path: ${{env.FILE_NAME}}-${{env.Build_VERSION}}.7z*
 
-    # 发布镜像
+    # 发布镜像，修改release_name → name
     - name: Release
       uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{env.FILE_NAME}}-${{env.Build_VERSION}}
-        release_name: ${{env.FILE_NAME}}-${{env.Build_VERSION}}
+        name: ${{env.FILE_NAME}}-${{env.Build_VERSION}}
         files: ${{env.FILE_NAME}}-${{env.Build_VERSION}}.7z*
